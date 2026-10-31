@@ -1,12 +1,21 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 export default function Navbar() {
   const pathname = usePathname();
 
-  // TODO: replace with the real logged-in user after BetterAuth setup
-  const user = null;
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    toast.success("Logged out successfully");
+    router.push("/");
+  };
 
   const publicLinks = [
     { href: "/", label: "Home" },
@@ -77,7 +86,7 @@ export default function Navbar() {
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="avatar cursor-pointer">
               <div className="w-10 rounded-full">
-                <img src={user.image} alt={user.name} />
+                <img src={user.image || `https://ui-avatars.com/api/?name=${user.name}`} alt={user.name} />
               </div>
             </div>
             <ul
@@ -89,7 +98,7 @@ export default function Navbar() {
                 <Link href="/profile">My Profile</Link>
               </li>
               <li>
-                <button>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>
           </div>
