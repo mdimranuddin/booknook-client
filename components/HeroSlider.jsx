@@ -24,6 +24,7 @@ const slides = [
     title: "Share Your Own Books",
     text: "Add the books you own and let other readers enjoy them. A library grows when we share.",
     bg: "from-[#c58b2a] to-[#7a5412]",
+    extra: { label: "Add Your Book", href: "/add-book" },
   },
 ];
 
@@ -54,9 +55,19 @@ export default function HeroSlider() {
               <p className="mt-4 text-base md:text-lg opacity-90 max-w-2xl mx-auto">
                 {slide.text}
               </p>
-              <Link href="/books" className="btn btn-secondary btn-lg mt-8">
-                Browse Books
-              </Link>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link href="/books" className="btn btn-secondary btn-lg">
+                  Browse Books
+                </Link>
+                {slide.extra && (
+                  <Link
+                    href={slide.extra.href}
+                    className="btn btn-outline btn-lg border-white text-white hover:bg-white hover:text-neutral"
+                  >
+                    {slide.extra.label}
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </SwiperSlide>
