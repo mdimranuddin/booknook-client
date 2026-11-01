@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { authFetch } from "@/lib/api";
 
 export default function BorrowButton({ bookId, availableCopies }) {
   const router = useRouter();
@@ -15,14 +16,9 @@ export default function BorrowButton({ bookId, availableCopies }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/borrows`, {
+      const res = await authFetch("/borrows", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bookId,
-          userName: user.name,
-          userEmail: user.email,
-        }),
+        body: JSON.stringify({ bookId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to borrow the book");

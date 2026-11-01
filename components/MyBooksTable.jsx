@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { authFetch } from "@/lib/api";
 
 export default function MyBooksTable() {
   const { data: session, isPending } = authClient.useSession();
@@ -61,14 +62,10 @@ export default function MyBooksTable() {
 
     setSaving(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/books/${editBook._id}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updated),
-        }
-      );
+      const res = await authFetch(`/books/${editBook._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(updated),
+      });
       if (!res.ok) throw new Error("Failed to update the book");
 
       setBooks((prev) =>
@@ -86,10 +83,9 @@ export default function MyBooksTable() {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/books/${deleteBook._id}`,
-        { method: "DELETE" }
-      );
+      const res = await authFetch(`/books/${deleteBook._id}`, {
+        method: "DELETE",
+      });
       if (!res.ok) throw new Error("Failed to delete the book");
 
       setBooks((prev) => prev.filter((b) => b._id !== deleteBook._id));

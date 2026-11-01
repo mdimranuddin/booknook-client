@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { authFetch } from "@/lib/api";
 
 export default function AddBookForm() {
   const router = useRouter();
@@ -39,9 +40,8 @@ export default function AddBookForm() {
         addedByEmail: user.email,
       };
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books`, {
+      const res = await authFetch("/books", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(book),
       });
       if (!res.ok) throw new Error("Failed to add the book");

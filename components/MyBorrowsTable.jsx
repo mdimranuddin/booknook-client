@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { authFetch } from "@/lib/api";
 
 const formatDate = (date) =>
   new Date(date).toLocaleDateString("en-GB", {
@@ -23,9 +24,7 @@ export default function MyBorrowsTable() {
 
     const loadBorrows = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/borrows?email=${encodeURIComponent(user.email)}`
-        );
+        const res = await authFetch("/borrows");
         const data = await res.json();
         setBorrows(Array.isArray(data) ? data : []);
       } catch (error) {
@@ -40,9 +39,7 @@ export default function MyBorrowsTable() {
   const handleReturn = async (id) => {
     setReturningId(id);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/borrows/${id}`, {
-        method: "DELETE",
-      });
+      const res = await authFetch(`/borrows/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to return the book");
 
       setBorrows((prev) => prev.filter((b) => b._id !== id));
