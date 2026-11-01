@@ -1,4 +1,5 @@
 import { Search, BookMarked, Undo2 } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
 const steps = [
   {
@@ -21,24 +22,23 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section className="max-w-7xl mx-auto px-4 lg:px-10 py-16">
-      <div className="text-center mb-10">
+      <Reveal className="text-center mb-10">
         <h2 className="section-title">How Borrowing Works</h2>
         <p className="mt-3 opacity-70">Three simple steps. No paperwork.</p>
-      </div>
+      </Reveal>
       <div className="grid gap-8 md:grid-cols-3">
-        {steps.map((step) => (
-          <div
-            key={step.title}
-            className="card bg-base-100 text-center h-full"
-          >
-            <div className="card-body items-center">
-              <div className="icon-box">
-                <step.Icon size={30} strokeWidth={2.5} />
+        {steps.map((step, i) => (
+          <Reveal key={step.title} delay={i * 0.12} className="h-full">
+            <div className="card bg-base-100 text-center h-full">
+              <div className="card-body items-center">
+                <div className="icon-box">
+                  <step.Icon size={30} strokeWidth={2.5} />
+                </div>
+                <h3 className="card-title text-2xl mt-3">{step.title}</h3>
+                <p className="opacity-75">{step.text}</p>
               </div>
-              <h3 className="card-title text-2xl mt-3">{step.title}</h3>
-              <p className="opacity-75">{step.text}</p>
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
