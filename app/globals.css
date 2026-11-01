@@ -160,3 +160,58 @@ h1, h2, h3, h4 {
 .file-input {
   border: 2px solid var(--ink);
 }
+
+/* ---------- Part 2: floating 3D books, marquee, icon boxes ---------- */
+.book-3d {
+  border: 3px solid #14112b;
+  border-radius: 6px;
+  box-shadow: 8px 8px 0 #14112b;
+  transform: perspective(900px) rotateY(var(--ry, -18deg)) rotateX(6deg);
+  animation: floaty 5s ease-in-out infinite;
+  object-fit: cover;
+  background: #fff;
+}
+@keyframes floaty {
+  0%, 100% {
+    transform: perspective(900px) rotateY(var(--ry, -18deg)) rotateX(6deg) translateY(0);
+  }
+  50% {
+    transform: perspective(900px) rotateY(var(--ry, -18deg)) rotateX(6deg) translateY(-16px);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  background: var(--color-neutral);
+  color: var(--color-neutral-content);
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  background: var(--color-accent);
+  color: #14112b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-3d, .marquee-track {
+    animation: none;
+  }
+}
