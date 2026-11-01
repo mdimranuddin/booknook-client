@@ -1,5 +1,6 @@
 import Link from "next/link";
 import HeroSlider from "@/components/HeroSlider";
+import Marquee from "@/components/Marquee";
 import BookCard from "@/components/BookCard";
 import HowItWorks from "@/components/HowItWorks";
 import TopCategories from "@/components/TopCategories";
@@ -22,6 +23,7 @@ export default async function Home() {
   return (
     <>
       <HeroSlider />
+      <Marquee />
 
       <section className="max-w-7xl mx-auto px-4 lg:px-10 py-16">
         <div className="text-center mb-10">
