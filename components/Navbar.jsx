@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -82,6 +83,7 @@ export default function Navbar() {
       </div>
 
       <div className="navbar-end gap-2">
+        <ThemeToggle />
         {user ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="avatar cursor-pointer">

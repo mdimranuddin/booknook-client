@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,6 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+});
+
 export const metadata = {
   title: {
     default: "BookNook | Home",
@@ -22,18 +27,34 @@ export const metadata = {
   description: "BookNook is a small online library. Add, borrow and return books.",
 };
 
+// sets the saved theme before the page shows, so there is no flash
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light"){t="light"}document.documentElement.setAttribute("data-theme",t)}catch(e){}})();`;
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       data-theme="light"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <Toaster position="top-right" />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              border: "2px solid #14112b",
+              boxShadow: "4px 4px 0 #14112b",
+              fontWeight: 600,
+            },
+          }}
+        />
       </body>
     </html>
   );

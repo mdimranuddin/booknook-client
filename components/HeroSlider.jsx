@@ -11,19 +11,19 @@ const slides = [
     emoji: "📖",
     title: "Your Cozy Corner for Great Books",
     text: "Browse our growing shelf of stories, science and history. Every book is one click away.",
-    bg: "from-[#1f5f4a] to-[#0f3d2e]",
+    bg: "from-[#7c3aed] to-[#4c1d95]",
   },
   {
     emoji: "🤝",
     title: "Borrow a Book for 7 Days",
     text: "Pick a book you love, borrow it for a week and return it when you finish reading.",
-    bg: "from-[#8c3b2a] to-[#4a1d14]",
+    bg: "from-[#ff4d8d] to-[#b8195a]",
   },
   {
     emoji: "✍️",
     title: "Share Your Own Books",
     text: "Add the books you own and let other readers enjoy them. A library grows when we share.",
-    bg: "from-[#c58b2a] to-[#7a5412]",
+    bg: "from-[#0ea5e9] to-[#0369a1]",
     extra: { label: "Add Your Book", href: "/add-book" },
   },
 ];
