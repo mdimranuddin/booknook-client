@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 import ThemeToggle from "@/components/ThemeToggle";
+import Avatar from "@/components/Avatar";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -88,7 +89,7 @@ export default function Navbar() {
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="avatar cursor-pointer">
               <div className="w-10 rounded-full">
-                <img src={user.image || `https://ui-avatars.com/api/?name=${user.name}`} alt={user.name} />
+                <Avatar user={user} />
               </div>
             </div>
             <ul

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import Avatar from "@/components/Avatar";
 
 export default function ProfileCard() {
   const { data: session, isPending } = authClient.useSession();
@@ -32,10 +33,7 @@ export default function ProfileCard() {
         <div className="card-body items-center text-center">
           <div className="avatar">
             <div className="w-28 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img
-                src={user.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`}
-                alt={user.name}
-              />
+              <Avatar user={user} />
             </div>
           </div>
           <h2 className="card-title text-3xl mt-4">{user.name}</h2>
