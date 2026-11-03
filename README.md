@@ -12,6 +12,7 @@ BookNook is a small online library. Add a book, borrow a book, return a book.
 - **Smart borrowing:** borrow a book for 7 days, copies go down and up automatically, "Not Available" shows at 0 copies, and the same book cannot be borrowed twice
 - **JWT-protected API:** the Express server verifies the token on every protected route, and only a book's owner can edit or delete it
 - **Dynamic Home page:** Swiper slider, the 6 newest books from the database, and extra sections
+- **Modern UI:** sticker-style 3D design, dark and light mode, floating book covers, and smooth Framer Motion animations
 - **Responsive design:** works on mobile, tablet and desktop, with a custom 404 page, loading spinners and toast messages
 
 ## Tech Stack
