@@ -5,6 +5,7 @@ const quickLinks = [
   { href: "/books", label: "All Books" },
   { href: "/login", label: "Login" },
   { href: "/register", label: "Register" },
+  { href: "/privacy", label: "Privacy Policy" },
 ];
 
 const socialClass =
