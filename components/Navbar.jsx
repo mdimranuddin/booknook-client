@@ -10,7 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const router = useRouter();
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
   const handleLogout = async () => {
@@ -85,7 +85,9 @@ export default function Navbar() {
 
       <div className="navbar-end gap-2">
         <ThemeToggle />
-        {user ? (
+        {isPending ? (
+          <div className="skeleton w-10 h-10 rounded-full"></div>
+        ) : user ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="avatar cursor-pointer">
               <div className="w-10 rounded-full">
